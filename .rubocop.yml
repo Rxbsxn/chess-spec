@@ -1,0 +1,19 @@
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+MethodLength:
+  Enabled: true
+  CountComments: false
+  Max: 25
+
+Lint/Debugger:
+  Enabled: false

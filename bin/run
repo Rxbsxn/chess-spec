@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
+
+require 'pry'
+require 'support/read_from_file'
+require 'game/board'
+require 'chess_piece_move'
+require 'figure/knight'
+require 'figure/pawn'
+require 'figure/king'
+require 'figure/bishop'
+require 'figure/queen'
+require 'figure/rook'
+require 'support/fetch_figure_class'
+
+class Exercise
+  include Support::ReadFromFile
+  include Support::FetchFigureClass
+
+  def initialize
+    @figure_move_class = figure_move_class
+  end
+
+  def call
+    each_line do |line|
+      format_output(calculate_possible_positions(line))
+    end
+  end
+
+  private
+
+  def format_output(positions)
+    positions.join(' ') << "\n"
+  end
+
+  def calculate_possible_positions(line)
+    ChessPieceMove.new(line, figure_move_class).possible_positions
+  end
+end
+
+# p ARGV[1]
+# Exercise.new.call
+
+board = Game::Board.new
+p 'White Pawn'
+p board.possible_moves(1, 2)
+p 'Black Pawn'
+p board.possible_moves(1, 7)
+# p board.collision_check?([1, 2], [1, 3]) ? 'Move successful!' : 'Move failed ;('
